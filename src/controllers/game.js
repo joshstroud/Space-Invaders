@@ -2,6 +2,11 @@ import Enemy from "../entities/enemy"
 import Player from "../entities/player"
 import CanvasController from "../controllers/canvas_controller"
 import Vector2d from "../util/vector";
+import {
+  ENEMY_BULLET_TYPE,
+  PLAYER_BULLET_TYPE,
+  Bullet
+} from "../entities/bullet"
 
 class Game {
   constructor() {
@@ -103,6 +108,7 @@ class Game {
 
   update(dt = 16) {
 
+    // refactor key press code out to classes?
     console.log(this.rightPressed)
     if (this.leftPressed) {
       this.player.direction = new Vector2d(-30, 0);
@@ -110,6 +116,16 @@ class Game {
       this.player.direction = new Vector2d(30, 0);
     } else {
       this.player.direction = new Vector2d(0, 0);
+    }
+
+    if (this.spacePressed) {
+      let bullet = new Bullet({
+        position: this.player.position,
+        width: 20,
+        height: 20,
+        type: PLAYER_BULLET_TYPE
+      });
+      this.addEntity(bullet);
     }
 
     for (let i = 0; i < this.entities.length; i++) {
