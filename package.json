@@ -1,0 +1,30 @@
+{
+  "name": "javascript-project",
+  "version": "1.0.0",
+  "description": "## **Overview**",
+  "main": "webpack.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "dependencies": {
+    "html-webpack-plugin": "^3.2.0",
+    "webpack": "^4.28.1",
+    "webpack-cli": "^3.2.1",
+    "webpack-dev-server": "^3.1.14"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start:dev": "webpack-dev-server --mode=development"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joshstroud/GalaxianClone.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joshstroud/GalaxianClone/issues"
+  },
+  "homepage": "https://github.com/joshstroud/GalaxianClone#readme"
+}
