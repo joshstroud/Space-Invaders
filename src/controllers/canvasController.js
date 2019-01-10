@@ -1,3 +1,6 @@
+import Enemy from "../entities/enemy"
+import Player from "../entities/player"
+
 class canvasController {
   constructor(game) {
     this.canvas = document.getElementById("canvas");
