@@ -2,7 +2,13 @@ import Rectangle from "../util/rectangle"
 import Vector2d from "../util/vector";
 
 class Entity {
-  constructor(position, speed, direction) {
+  constructor({
+    position,
+    speed,
+    direction,
+    width,
+    height
+  }) {
     this.position = position;
     this.speed = speed;
     this.direction = direction;

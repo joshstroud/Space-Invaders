@@ -10,7 +10,7 @@ class Game {
     this.started = false;
   }
 
-  start() {
+  play() {
     this.started = true;
   }
 
@@ -19,9 +19,9 @@ class Game {
     if (entity instanceof Enemy) {
       this.enemies.push(entity);
     } else if (entity instanceof Player) {
-      this.player = player;
+      this.player = entity;
     }
-    return entity;
+    return this.entities;
   }
 
   removeEntities(entities) {
@@ -44,6 +44,6 @@ class Game {
       array.splice(index, 1);
     }
   }
-
-
 }
+
+export default Game;
