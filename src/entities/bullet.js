@@ -1,5 +1,6 @@
 import Entity from "./entity"
 import Vector2d from "../util/vector";
+import * as GameConstants from "../util/constants"
 
 export const ENEMY_BULLET_TYPE = "ENEMY_BULLET_TYPE";
 export const PLAYER_BULLET_TYPE = "PLAYER_BULLET_TYPE";
@@ -28,4 +29,13 @@ export class Bullet extends Entity {
     }
     this.direction = this.direction.multiply(20);
   }
+
+  // update(dt) {
+  //   this.prototype.update.call(this);
+
+  //   if (this.position.y < 0 || this.position.y > GameConstants.CANVAS_HEIGHT) {
+
+  //   }
+  // }
+
 }
