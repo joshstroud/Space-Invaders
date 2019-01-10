@@ -35,8 +35,9 @@ export const testCanvas = () => {
 
   let cc = new CanvasController(g);
 
-  debugger
   window.cc = cc;
 
   cc.render();
+
+  g.play();
 }

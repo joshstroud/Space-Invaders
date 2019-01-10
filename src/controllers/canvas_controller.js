@@ -9,7 +9,6 @@ class canvasController {
   }
 
   drawBox(color, entity) {
-    debugger
     this.context.fillStyle = color;
     this.context.fillRect(entity.position.x, entity.position.y, entity.position.x + entity.width, entity.position.y + entity.height);
   }

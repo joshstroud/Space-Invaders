@@ -4,13 +4,11 @@ import Vector2d from "../util/vector";
 class Entity {
   constructor({
     position,
-    speed,
     direction,
     width,
     height
   }) {
     this.position = position;
-    this.speed = speed;
     this.direction = direction;
 
     this.width = width;
@@ -22,9 +20,9 @@ class Entity {
   }
 
   update(dt) {
-    // const newX = this.x + this.speed * this.direction.x;
-    // const newY = this.y + this.speed * this.direction.y;
-    // return new Vector2d(newX, newY);
+    const newX = this.position.x + this.direction.x / dt;
+    const newY = this.position.y + this.direction.y / dt;
+    this.position = new Vector2d(newX, newY);
   }
 }
 
