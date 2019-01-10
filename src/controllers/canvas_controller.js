@@ -21,7 +21,7 @@ class canvasController {
     for (let i = 0; i < this.game.entities.length; i++) {
       let entity = this.game.entities[i];
 
-      console.log(`x: ${entity.position.x}, y: ${entity.position.y}`)
+      // console.log(`x: ${entity.position.x}, y: ${entity.position.y}`)
       let color = null;
       if (entity instanceof Enemy) {
         color = "#00ff00";

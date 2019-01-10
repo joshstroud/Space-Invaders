@@ -12,4 +12,13 @@ import {
 } from "./tests/global_tests"
 
 // testAddAndRemoveEntities();
-testCanvas();
+// testCanvas();
+
+const startGame = () => {
+  const game = new Game();
+  window.game = game;
+
+  game.play();
+}
+
+startGame();

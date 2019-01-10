@@ -1,6 +1,7 @@
 import Enemy from "../entities/enemy"
 import Player from "../entities/player"
 import CanvasController from "../controllers/canvas_controller"
+import Vector2d from "../util/vector";
 
 class Game {
   constructor() {
@@ -10,26 +11,57 @@ class Game {
     this.gameRect
     this.started = false;
 
+    this.leftPressed = false;
+    this.rightPressed = false;
+    this.spacePressed = false;
     this.canvasController = new CanvasController(this);
   }
 
   setup() {
     let p1 = new Player({
-      direction: new vector(1, 1),
-      speed: 0.5,
-      position: new vector(20, 20),
+      direction: new Vector2d(0, 0),
+      position: new Vector2d(320, 300),
       width: 20,
       height: 20
     });
     this.addEntity(p1);
     let e1 = new Enemy({
-      direction: new vector(1, 1),
-      speed: 0.5,
-      position: new vector(200, 200),
+      direction: new Vector2d(1, 1),
+      position: new Vector2d(200, 200),
       width: 20,
       height: 20
     });
     this.addEntity(e1);
+    this.setupKeyHandlers();
+  }
+
+  setupKeyHandlers() {
+    document.addEventListener("keydown", this.keyDownHandler.bind(this));
+    document.addEventListener("keyup", this.keyUpHandler.bind(this));
+  }
+
+  keyDownHandler(e) {
+    e.preventDefault();
+    if (e.keyCode == 39) {
+      this.rightPressed = true;
+    } else if (e.keyCode == 37) {
+      this.leftPressed = true;
+    } else if (e.keyCode == 32) {
+      this.spacePressed = true;
+    }
+
+    // console.log("keydown", e);
+  }
+
+  keyUpHandler(e) {
+    if (e.keyCode == 39) {
+      this.rightPressed = false;
+    } else if (e.keyCode == 37) {
+      this.leftPressed = false;
+    } else if (e.keyCode == 32) {
+      this.spacePressed = false;
+    }
+    // console.log("keyup: ", e);
   }
 
   play() {
@@ -70,6 +102,15 @@ class Game {
   }
 
   update(dt = 16) {
+
+    console.log(this.rightPressed)
+    if (this.leftPressed) {
+      this.player.direction = new Vector2d(-30, 0);
+    } else if (this.rightPressed) {
+      this.player.direction = new Vector2d(30, 0);
+    } else {
+      this.player.direction = new Vector2d(0, 0);
+    }
 
     for (let i = 0; i < this.entities.length; i++) {
       const entity = this.entities[i];
