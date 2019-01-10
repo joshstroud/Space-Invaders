@@ -1,4 +1,6 @@
 import Entity from "./entity"
+import Vector2d from "../util/vector";
+import * as GameConstants from "../util/constants"
 
 class Player extends Entity {
   constructor({
@@ -6,7 +8,8 @@ class Player extends Entity {
     speed,
     direction,
     width,
-    height
+    height,
+    canvasWidth
   }) {
     super({
       position,
@@ -16,7 +19,17 @@ class Player extends Entity {
       height
     });
 
+    this.canvasWidth = canvasWidth;
+
+  }
+
+  update(dt) {
+    super.update(dt);
+    if (this.position.x < 0) {
+      this.position = new Vector2d(0, this.position.y)
+    } else if ((this.position.x + this.width) > GameConstants.CANVAS_WIDTH) {
+      this.position = new Vector2d(GameConstants.CANVAS_WIDTH - this.width, this.position.y)
+    }
   }
 }
-
 export default Player;
