@@ -14,7 +14,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start:dev": "webpack-dev-server --mode=development"
+    "start:dev": "webpack-dev-server --mode=development --content-base \"./dist\""
   },
   "repository": {
     "type": "git",

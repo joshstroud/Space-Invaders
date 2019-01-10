@@ -7,3 +7,9 @@ import Enemy from "./entities/enemy"
 import {
   testAddAndRemoveEntities
 } from "./tests/game_tests"
+import {
+  testCanvas
+} from "./tests/global_tests"
+
+// testAddAndRemoveEntities();
+testCanvas();

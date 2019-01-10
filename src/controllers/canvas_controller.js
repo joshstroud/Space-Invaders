@@ -9,13 +9,14 @@ class canvasController {
   }
 
   drawBox(color, entity) {
+    debugger
     this.context.fillStyle = color;
-    this.context.fillRect(entity.x, entity.y, entity.x + entity.width, entity.y + entity.height);
+    this.context.fillRect(entity.position.x, entity.position.y, entity.position.x + entity.width, entity.position.y + entity.height);
   }
 
   render() {
     this.context.fillStyle = "#000000";
-    context.fillRect(0, 0, this.canvas.width, this.canvas.height);
+    this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
     for (let i = 0; i < this.game.entities.length; i++) {
       let entity = this.game.entities[i];
@@ -26,9 +27,10 @@ class canvasController {
       } else {
         color = "#ffffff"
       }
+      console.log(this.game.entities);
       this.drawBox(color, entity);
     }
   }
-
-
 }
+
+export default canvasController

@@ -4,12 +4,16 @@ class Enemy extends Entity {
   constructor({
     position,
     speed,
-    direction
+    direction,
+    width,
+    height
   }) {
     super({
       position,
       speed,
-      direction
+      direction,
+      width,
+      height
     });
 
   }
