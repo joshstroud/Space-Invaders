@@ -1,3 +1,3 @@
-import Vector2d from "./vector"
+import Rectangle from "./util/rectangle"
 
-window.vector2d = Vector2d
+window.Rectangle = Rectangle
