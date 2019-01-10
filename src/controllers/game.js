@@ -1,5 +1,6 @@
 import Enemy from "../entities/enemy"
 import Player from "../entities/player"
+import CanvasController from "../controllers/canvas_controller"
 
 class Game {
   constructor() {
@@ -8,6 +9,8 @@ class Game {
     this.player = null;
     this.gameRect
     this.started = false;
+
+    this.canvasController = new CanvasController(this);
   }
 
   setup() {
@@ -73,6 +76,8 @@ class Game {
       // console.log(`x: ${entity.position.x}, y: ${entity.position.y}`)
       entity.update(dt);
     }
+
+    this.canvasController.render();
   }
 }
 
