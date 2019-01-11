@@ -41,6 +41,7 @@ class Game {
     this.setupPlayer();
     this.setupEnemies();
     this.setupKeyHandlers();
+    this.lastTime = Date.now();
   }
 
   setupPlayer() {
@@ -125,7 +126,7 @@ class Game {
   play() {
     this.started = true;
     this.setup();
-    window.setInterval(this.update.bind(this), 16);
+    window.requestAnimationFrame(this.update.bind(this));
   }
 
   endGame() {
@@ -273,13 +274,17 @@ class Game {
     // }
   }
 
-  update(dt = 16) {
+  update() {
     this.handlePlayerMovement();
     this.handleSpacePress();
+
+    let now = Date.now();
+    let dt = (now - this.lastTime);
 
     for (let i = 0; i < this.entities.length; i++) {
       const entity = this.entities[i];
       // console.log(`x: ${entity.position.x}, y: ${entity.position.y}`)
+
       entity.update(dt);
 
       this.checkEntityInBounds(entity);
@@ -290,6 +295,8 @@ class Game {
     }
 
     this.canvasController.render();
+    this.lastTime = now;
+    window.requestAnimationFrame(this.update.bind(this))
   }
 }
 

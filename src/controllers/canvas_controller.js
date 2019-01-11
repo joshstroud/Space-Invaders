@@ -106,6 +106,7 @@ class canvasController {
       } else {
         color = "#ffffff"
       }
+
       this.drawBox(color, entity);
     }
   }
