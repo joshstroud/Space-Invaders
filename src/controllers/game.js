@@ -32,6 +32,9 @@ class Game {
     this.rightPressed = false;
     this.spacePressed = false;
     this.canvasController = new CanvasController(this);
+
+    this.livesRemaining = 2;
+    this.gameOver = false;
   }
 
   setup() {
@@ -123,6 +126,10 @@ class Game {
     this.started = true;
     this.setup();
     window.setInterval(this.update.bind(this), 16);
+  }
+
+  endGame() {
+    console.log("Game is over")
   }
 
   addEntity(entity) {
@@ -241,7 +248,7 @@ class Game {
         } else if (entity1 instanceof Bullet &&
           entity2 instanceof Player &&
           entity1.type == ENEMY_BULLET_TYPE) {
-          this.handlePlayerBulletCollision();
+          this.handlePlayerBulletCollision(entity1);
         }
       }
     }
@@ -255,8 +262,9 @@ class Game {
     // console.log("enemy bullet collision");
   }
 
-  handlePlayerBulletCollision() {
-
+  handlePlayerBulletCollision(bullet) {
+    console.log(bullet);
+    this.player.die(bullet);
   }
 
   updateEnemyPosition(enemy) {
@@ -266,7 +274,6 @@ class Game {
   }
 
   update(dt = 16) {
-
     this.handlePlayerMovement();
     this.handleSpacePress();
 

@@ -9,14 +9,17 @@ class Player extends Entity {
     direction,
     width,
     height,
-    canvasWidth
+    canvasWidth,
+    game
   }) {
     super({
       position,
       speed,
       direction,
       width,
-      height
+      height,
+      canvasWidth,
+      game
     });
 
     this.canvasWidth = canvasWidth;
@@ -29,6 +32,15 @@ class Player extends Entity {
       this.position = new Vector2d(0, this.position.y)
     } else if ((this.position.x + this.width) > GameConstants.CANVAS_WIDTH) {
       this.position = new Vector2d(GameConstants.CANVAS_WIDTH - this.width, this.position.y)
+    }
+  }
+
+  die(collidingEntity) {
+    this.game.livesRemaining -= 1;
+    collidingEntity.position = new Vector2d(100000, 10000);
+    this.game.removeEntities([collidingEntity]);
+    if (this.game.livesRemaining < 0) {
+      this.game.endGame();
     }
   }
 }
