@@ -6,13 +6,15 @@ class Entity {
     position,
     direction,
     width,
-    height
+    height,
+    game
   }) {
     this.position = position;
     this.direction = direction;
 
     this.width = width;
     this.height = height;
+    this.game = game;
   }
 
   collisionRect() {

@@ -45,7 +45,8 @@ class Game {
       direction: new Vector2d(0, 0),
       position: new Vector2d(320, 300),
       width: 20,
-      height: 20
+      height: 20,
+      game: this
     });
     this.addEntity(p);
   }
@@ -56,7 +57,8 @@ class Game {
         direction: new Vector2d(10, 0),
         position: new Vector2d(100 + 40 * i, 20),
         width: 20,
-        height: 20
+        height: 20,
+        game: this
       });
       this.addEntity(e);
     }
