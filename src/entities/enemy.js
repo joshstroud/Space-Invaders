@@ -1,6 +1,10 @@
 import Entity from "./entity"
+import Vector2d from "../util/vector";
 
-class Enemy extends Entity {
+export const HOME_STATE = "HOME_STATE";
+export const CHASING_STATE = "CHASING_STATE";
+
+export class Enemy extends Entity {
   constructor({
     position,
     speed,
@@ -15,8 +19,6 @@ class Enemy extends Entity {
       width,
       height
     });
-
+    this.state = HOME_STATE;
   }
 }
-
-export default Enemy;

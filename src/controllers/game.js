@@ -1,12 +1,19 @@
-import Enemy from "../entities/enemy"
+import {
+  Enemy,
+  HOME_STATE,
+  CHASING_STATE
+} from "../entities/enemy"
+
 import Player from "../entities/player"
 import CanvasController from "../controllers/canvas_controller"
 import Vector2d from "../util/vector";
+import Rectangle from "../util/rectangle";
 import {
   ENEMY_BULLET_TYPE,
   PLAYER_BULLET_TYPE,
   Bullet
 } from "../entities/bullet"
+
 import {
   CANVAS_WIDTH,
   CANVAS_HEIGHT
@@ -25,8 +32,6 @@ class Game {
     this.rightPressed = false;
     this.spacePressed = false;
     this.canvasController = new CanvasController(this);
-
-
   }
 
   setup() {
@@ -48,14 +53,41 @@ class Game {
   setupEnemies() {
     for (let i = 0; i < 5; i++) {
       const e = new Enemy({
-        direction: new Vector2d(1, 1),
+        direction: new Vector2d(10, 0),
         position: new Vector2d(100 + 40 * i, 20),
         width: 20,
         height: 20
       });
       this.addEntity(e);
     }
+
+    this.enemyBoundingRect = new Rectangle(0, 0, CANVAS_WIDTH, 200);
+    // updateEnemyBoundingBox();
+
   }
+
+  // updateEnemyBoundingBox() {
+  //   let minX = canvasWidth;
+  //   let minY = canvasHeight
+  //   let maxX = 0;
+  //   let maxY = 0;
+
+  //   for(let i = 0; i < this.enemies.length; i++) {
+  //     if(this.enemies[i].position.x < minX) {
+  //       minX = this.enemies.position.x;
+  //     }
+  //     if(this.enemies[i].position.y < minY) {
+  //       minY = this.enemies.position.y;
+  //     }
+  //     if(this.enemies[i].position.x + this.enemies[i].position.width < minX) {
+  //       minX = this.enemies;
+  //     }
+  //     if(this.enemies[i].position.x < minX) {
+  //       minX = this.enemies;
+  //     }
+  //   }
+  // }
+
   setupKeyHandlers() {
     document.addEventListener("keydown", this.keyDownHandler.bind(this));
     document.addEventListener("keyup", this.keyUpHandler.bind(this));
@@ -149,12 +181,24 @@ class Game {
 
   checkEntityInBounds(entity) {
     this.handleBulletBounds(entity);
+    this.handleEnemyBounds(entity);
   }
 
   handleBulletBounds(entity) {
     if (entity instanceof Bullet &&
       (entity.position.y + entity.height < 0 || entity.position.y > CANVAS_HEIGHT)) {
       this.removeEntities([entity]);
+    }
+  }
+
+  handleEnemyBounds(entity) {
+    if (entity instanceof Enemy) {
+      if (entity.state == HOME_STATE && (entity.position.x < this.enemyBoundingRect.left() || entity.position.x + entity.width > this.enemyBoundingRect.right())) {
+        for (let i = 0; i < this.enemies.length; i++) {
+          let enemy = this.enemies[i];
+          enemy.direction = new Vector2d(-1 * enemy.direction.x, enemy.direction.y);
+        }
+      }
     }
   }
 
@@ -187,25 +231,40 @@ class Game {
       if (entity1 && entity2 && entity1.collisionRect().intersects(entity2.collisionRect())) {
         // enemy collides with player
         if (entity1 instanceof Enemy && entity2 instanceof Player) {
-          this.handleEnemyPlayerCollision();
+          this.handleEnemyPlayerCollision(entity1);
         } else if (entity1 instanceof Enemy &&
           entity2 instanceof Bullet &&
           entity2.type == PLAYER_BULLET_TYPE) {
           this.handleEnemyBulletCollision();
+        } else if (entity1 instanceof Bullet &&
+          entity2 instanceof Player &&
+          entity1.type == ENEMY_BULLET_TYPE) {
+          this.handlePlayerBulletCollision();
         }
       }
     }
   }
 
-  handleEnemyPlayerCollision() {
-    console.log("enemy player collision");
+  handleEnemyPlayerCollision(enemy) {
+    // console.log("enemy player collision");
   }
 
   handleEnemyBulletCollision() {
-    console.log("enemy bullet collision");
+    // console.log("enemy bullet collision");
+  }
+
+  handlePlayerBulletCollision() {
+
+  }
+
+  updateEnemyPosition(enemy) {
+    // if (enemy.position.x + enemy.width && enemy.state == HOME_STATE) {
+    //   enemy.direction = new Vector2d(-1 * enemy.direction.x, enemy.direction.y);
+    // }
   }
 
   update(dt = 16) {
+
     this.handlePlayerMovement();
     this.handleSpacePress();
 
@@ -216,6 +275,9 @@ class Game {
 
       this.checkEntityInBounds(entity);
       this.checkCollisions();
+      if (entity instanceof Enemy) {
+        this.updateEnemyPosition(entity);
+      }
     }
 
     this.canvasController.render();
