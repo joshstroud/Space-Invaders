@@ -66,8 +66,6 @@ class Game {
       const e = new Enemy({
         direction: new Vector2d(10, 0),
         position: new Vector2d(100 + 40 * i, 20),
-        width: 20,
-        height: 20,
         game: this,
         image: this.spritesImage
       });

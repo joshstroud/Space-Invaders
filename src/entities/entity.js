@@ -30,6 +30,7 @@ class Entity {
 
     if (this.sprite) {
       this.sprite.updatePos(this.position)
+      this.sprite.update(dt);
     }
   }
 

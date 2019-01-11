@@ -23,13 +23,12 @@ export class Enemy extends Entity {
     position,
     speed,
     direction,
-    width,
-    height,
     game,
     image
   }) {
-    let sprite = new Sprite(image, new Vector2d(0, 0), position, [32, 32], 1, [3, 0, 1])
-
+    let sprite = new Sprite(image, new Vector2d(3, 2), position, [32, 32], 1, [3, 0, 1])
+    let width = 32;
+    let height = 32;
     super({
       position,
       speed,

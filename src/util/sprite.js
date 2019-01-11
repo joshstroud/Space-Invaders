@@ -11,7 +11,8 @@ class Sprite {
     this.once = once;
   };
   update(dt, newframePos) {
-    this._index += this.speed * dt;
+    // this._index += this.speed * dt;
+    this._index += 0.005 * dt;
   }
 
   updatePos(newPos) {
