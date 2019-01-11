@@ -11,13 +11,15 @@ export class Bullet extends Entity {
     direction,
     width,
     height,
-    type
+    type,
+    sprite
   }) {
     super({
       position,
       direction,
       width,
-      height
+      height,
+      sprite
     });
 
     this.type = type;

@@ -13,9 +13,8 @@ class canvasController {
     this.context = canvas.getContext("2d");
     this.game = game;
 
-    this.sprites = new Image();
-    this.sprites.src = spritesImagesUrl;
-    console.log(this.sprites)
+    this.spritesImage = new Image();
+    this.spritesImage.src = spritesImagesUrl;
   }
 
   drawBox(color, entity) {
@@ -99,15 +98,16 @@ class canvasController {
     for (let i = 0; i < this.game.entities.length; i++) {
       let entity = this.game.entities[i];
 
+      entity.render(this.context);
       // console.log(`x: ${entity.position.x}, y: ${entity.position.y}`)
-      let color = null;
-      if (entity instanceof Enemy) {
-        color = "#00ff00";
-      } else {
-        color = "#ffffff"
-      }
+      // let color = null;
+      // if (entity instanceof Enemy) {
+      //   color = "#00ff00";
+      // } else {
+      //   color = "#ffffff"
+      // }
 
-      this.drawBox(color, entity);
+      // this.drawBox(color, entity);
     }
   }
 }

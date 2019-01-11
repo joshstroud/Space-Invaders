@@ -19,6 +19,10 @@ import {
   CANVAS_HEIGHT
 } from "../util/constants"
 
+import spritesImagesUrl from "../img/sprites-2x.png";
+// import spritesImagesUrl from "../img/sprites-4x.png";
+const spriteSize = 32; // 4x: 64, 2x: 32, 1x: 16
+
 class Game {
   constructor() {
     this.entities = [];
@@ -38,6 +42,8 @@ class Game {
   }
 
   setup() {
+    this.spritesImage = new Image();
+    this.spritesImage.src = spritesImagesUrl;
     this.setupPlayer();
     this.setupEnemies();
     this.setupKeyHandlers();
@@ -62,7 +68,8 @@ class Game {
         position: new Vector2d(100 + 40 * i, 20),
         width: 20,
         height: 20,
-        game: this
+        game: this,
+        image: this.spritesImage
       });
       this.addEntity(e);
     }

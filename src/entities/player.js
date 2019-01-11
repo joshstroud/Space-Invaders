@@ -10,7 +10,8 @@ class Player extends Entity {
     width,
     height,
     canvasWidth,
-    game
+    game,
+    sprite
   }) {
     super({
       position,
@@ -19,7 +20,8 @@ class Player extends Entity {
       width,
       height,
       canvasWidth,
-      game
+      game,
+      sprite
     });
 
     this.canvasWidth = canvasWidth;

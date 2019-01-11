@@ -7,7 +7,8 @@ class Entity {
     direction,
     width,
     height,
-    game
+    game,
+    sprite
   }) {
     this.position = position;
     this.direction = direction;
@@ -15,6 +16,7 @@ class Entity {
     this.width = width;
     this.height = height;
     this.game = game;
+    this.sprite = sprite;
   }
 
   collisionRect() {
@@ -25,6 +27,16 @@ class Entity {
     const newX = this.position.x + this.direction.x / dt;
     const newY = this.position.y + this.direction.y / dt;
     this.position = new Vector2d(newX, newY);
+
+    if (this.sprite) {
+      this.sprite.updatePos(this.position)
+    }
+  }
+
+  render(ctx) {
+    if (this.sprite) {
+      this.sprite.render(ctx);
+    }
   }
 }
 

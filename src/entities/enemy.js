@@ -5,6 +5,13 @@ import {
   ENEMY_BULLET_TYPE
 } from "../entities/bullet"
 
+import Sprite from "../util/sprite"
+
+import {
+  SPRITES_FILE_NAME
+} from "../util/constants";
+// import sprite from `../img/sprites-2x.png`
+
 export const HOME_STATE = "HOME_STATE";
 export const CHASING_STATE = "CHASING_STATE";
 
@@ -18,15 +25,19 @@ export class Enemy extends Entity {
     direction,
     width,
     height,
-    game
+    game,
+    image
   }) {
+    let sprite = new Sprite(image, new Vector2d(0, 0), position, [32, 32], 1, [3, 0, 1])
+
     super({
       position,
       speed,
       direction,
       width,
       height,
-      game
+      game,
+      sprite
     });
 
     this.firePercent = BULLET_FIRE_PERCENT;
