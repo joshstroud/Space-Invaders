@@ -37,8 +37,10 @@ class Player extends Entity {
 
   die(collidingEntity) {
     this.game.livesRemaining -= 1;
+
     collidingEntity.position = new Vector2d(100000, 10000);
     this.game.removeEntities([collidingEntity]);
+
     if (this.game.livesRemaining < 0) {
       this.game.endGame();
     }
