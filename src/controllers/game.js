@@ -56,7 +56,8 @@ class Game {
       position: new Vector2d(320, 300),
       width: 20,
       height: 20,
-      game: this
+      game: this,
+      image: this.spritesImage
     });
     this.addEntity(p);
   }
@@ -173,11 +174,9 @@ class Game {
   }
 
   handleSpacePress() {
-    if (this.spacePressed) {
+    if (this.spacePressed && !this.bullets.some((bullet) => bullet.type === PLAYER_BULLET_TYPE)) {
       let bullet = new Bullet({
-        position: this.player.position,
-        width: 20,
-        height: 20,
+        position: new Vector2d(this.player.position.x + this.player.width / 2, this.player.position.y),
         type: PLAYER_BULLET_TYPE
       });
       this.addEntity(bullet);

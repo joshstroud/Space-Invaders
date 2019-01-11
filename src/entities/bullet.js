@@ -9,20 +9,20 @@ export class Bullet extends Entity {
   constructor({
     position,
     direction,
-    width,
-    height,
-    type,
-    sprite
+    type
   }) {
+    let bulletWidth = 2;
+    let bulletHeight = 12;
+
     super({
       position,
       direction,
-      width,
-      height,
-      sprite
+      width: bulletWidth,
+      height: bulletHeight
     });
 
     this.type = type;
+
 
     if (this.type === ENEMY_BULLET_TYPE) {
       this.direction = new Vector2d(0, 1);
@@ -32,12 +32,15 @@ export class Bullet extends Entity {
     this.direction = this.direction.multiply(20);
   }
 
-  // update(dt) {
-  //   this.prototype.update.call(this);
+  render(ctx) {
+    if (this.type === PLAYER_BULLET_TYPE) {
+      // yellow
+      ctx.fillStyle = "#EAEA39"
+    } else {
+      ctx.fillStyle = "#ffffff"
+    }
 
-  //   if (this.position.y < 0 || this.position.y > GameConstants.CANVAS_HEIGHT) {
-
-  //   }
-  // }
+    ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
+  }
 
 }

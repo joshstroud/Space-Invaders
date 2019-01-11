@@ -1,18 +1,21 @@
 import Entity from "./entity"
 import Vector2d from "../util/vector";
 import * as GameConstants from "../util/constants"
+import Sprite from "../util/sprite";
 
 class Player extends Entity {
   constructor({
     position,
     speed,
     direction,
-    width,
-    height,
     canvasWidth,
     game,
-    sprite
+    image
   }) {
+    let sprite = new Sprite(image, new Vector2d(2, 140), position, [32, 32], 1, [0])
+    let width = 32;
+    let height = 32;
+
     super({
       position,
       speed,
