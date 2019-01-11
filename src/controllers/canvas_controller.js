@@ -2,10 +2,8 @@ import {
   Enemy
 } from "../entities/enemy"
 import Player from "../entities/player"
+import Background from "./background"
 
-import spritesImagesUrl from "../img/sprites-2x.png";
-// import spritesImagesUrl from "../img/sprites-4x.png";
-const spriteSize = 32; // 4x: 64, 2x: 32, 1x: 16
 
 class canvasController {
   constructor(game) {
@@ -13,8 +11,7 @@ class canvasController {
     this.context = canvas.getContext("2d");
     this.game = game;
 
-    this.spritesImage = new Image();
-    this.spritesImage.src = spritesImagesUrl;
+    this.background = new Background();
   }
 
   drawBox(color, entity) {
@@ -94,6 +91,7 @@ class canvasController {
     this.context.fillStyle = "#000000";
     this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
+    this.background.render(this.context);
     // this.drawSpriteTest();
     for (let i = 0; i < this.game.entities.length; i++) {
       let entity = this.game.entities[i];

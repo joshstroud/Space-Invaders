@@ -19,7 +19,7 @@ import {
   CANVAS_HEIGHT
 } from "../util/constants"
 
-import spritesImagesUrl from "../img/sprites-2x.png";
+import spritesImagesUrl from "../img/sprites-2x-transparent.png";
 // import spritesImagesUrl from "../img/sprites-4x.png";
 const spriteSize = 32; // 4x: 64, 2x: 32, 1x: 16
 
