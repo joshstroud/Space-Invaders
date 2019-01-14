@@ -18,15 +18,30 @@ export const CHASING_STATE = "CHASING_STATE";
 const BULLET_FIRE_PERIOD = 10;
 const BULLET_FIRE_PERCENT = 1;
 
+export const RED_ENEMY = "RED_ENEMY"
+export const GREEN_ENEMY = "GREEN_ENEMY"
+export const PURPLE_ENEMY = "PURPLE_ENEMY"
+export const GOLD_ENEMY = "GOLD_ENEMY"
+
 export class Enemy extends Entity {
   constructor({
     position,
     speed,
     direction,
     game,
-    image
+    image,
+    type
   }) {
-    let sprite = new Sprite(image, new Vector2d(3, 2), position, [32, 32], 1, [3, 0, 1])
+    let sprite = null;
+    if (type === RED_ENEMY) {
+      sprite = new Sprite(image, new Vector2d(3, 2), position, [32, 32], 1, [3, 0, 1])
+    } else if (type === GREEN_ENEMY) {
+      sprite = new Sprite(image, new Vector2d(3, 66), position, [32, 32], 1, [3, 0, 1])
+    } else if (type === PURPLE_ENEMY) {
+      sprite = new Sprite(image, new Vector2d(3, 34), position, [32, 32], 1, [3, 0, 1])
+    } else if (type === GOLD_ENEMY) {
+      sprite = new Sprite(image, new Vector2d(3, 98), position, [32, 32], 1, [0])
+    }
     let width = 32;
     let height = 32;
     super({
@@ -56,8 +71,7 @@ export class Enemy extends Entity {
         type: ENEMY_BULLET_TYPE,
         game: this.game,
         width: 10,
-        height: 10
-
+        height: 10,
       })
       this.game.addEntity(bullet);
     }
@@ -75,6 +89,6 @@ export class Enemy extends Entity {
   }
 
   randomPercentage() {
-    return Math.floor(Math.random() * (100));
+    return Math.floor(Math.random() * (800));
   }
 }

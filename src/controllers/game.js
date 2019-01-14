@@ -1,7 +1,11 @@
 import {
   Enemy,
   HOME_STATE,
-  CHASING_STATE
+  CHASING_STATE,
+  RED_ENEMY,
+  GREEN_ENEMY,
+  PURPLE_ENEMY,
+  GOLD_ENEMY
 } from "../entities/enemy"
 
 import Player from "../entities/player"
@@ -57,7 +61,7 @@ class Game {
   setupPlayer() {
     let p = new Player({
       direction: new Vector2d(0, 0),
-      position: new Vector2d(320, 300),
+      position: new Vector2d(320, 500),
       width: 20,
       height: 20,
       game: this,
@@ -67,12 +71,79 @@ class Game {
   }
 
   setupEnemies() {
-    for (let i = 0; i < 5; i++) {
+    const topLeftPos = new Vector2d(100, 60);
+    const horzSpacing = 36;
+    const vertSpacing = 36;
+
+    let e1 = new Enemy({
+      direction: new Vector2d(10, 0),
+      position: new Vector2d(topLeftPos.x + horzSpacing * 3, topLeftPos.y),
+      game: this,
+      image: this.spritesImage,
+      type: GOLD_ENEMY
+    });
+    this.addEntity(e1);
+
+    e1 = new Enemy({
+      direction: new Vector2d(10, 0),
+      position: new Vector2d(topLeftPos.x + horzSpacing * 6, topLeftPos.y),
+      game: this,
+      image: this.spritesImage,
+      type: GOLD_ENEMY
+    });
+    this.addEntity(e1);
+
+
+    for (let horzIdx = 0; horzIdx < 6; horzIdx++) {
+      const e2 = new Enemy({
+        direction: new Vector2d(10, 0),
+        position: new Vector2d(topLeftPos.x + horzSpacing * (horzIdx + 2), topLeftPos.y + vertSpacing),
+        game: this,
+        image: this.spritesImage,
+        type: RED_ENEMY
+      });
+      this.addEntity(e2);
+    }
+
+
+    for (let horzIdx = 0; horzIdx < 8; horzIdx++) {
+      const e3 = new Enemy({
+        direction: new Vector2d(10, 0),
+        position: new Vector2d(topLeftPos.x + horzSpacing * (horzIdx + 1), topLeftPos.y + vertSpacing * 2),
+        game: this,
+        image: this.spritesImage,
+        type: PURPLE_ENEMY
+      });
+      this.addEntity(e3);
+    }
+
+    for (let horzIdx = 0; horzIdx < 8; horzIdx++) {
       const e = new Enemy({
         direction: new Vector2d(10, 0),
-        position: new Vector2d(100 + 40 * i, 80),
+        position: new Vector2d(topLeftPos.x + horzSpacing * (horzIdx + 1), topLeftPos.y + vertSpacing * 3),
         game: this,
-        image: this.spritesImage
+        image: this.spritesImage,
+        type: GREEN_ENEMY
+      });
+      this.addEntity(e);
+    }
+    for (let horzIdx = 0; horzIdx < 10; horzIdx++) {
+      const e = new Enemy({
+        direction: new Vector2d(10, 0),
+        position: new Vector2d(topLeftPos.x + horzSpacing * horzIdx, topLeftPos.y + vertSpacing * 4),
+        game: this,
+        image: this.spritesImage,
+        type: GREEN_ENEMY
+      });
+      this.addEntity(e);
+    }
+    for (let horzIdx = 0; horzIdx < 10; horzIdx++) {
+      const e = new Enemy({
+        direction: new Vector2d(10, 0),
+        position: new Vector2d(topLeftPos.x + horzSpacing * horzIdx, topLeftPos.y + vertSpacing * 5),
+        game: this,
+        image: this.spritesImage,
+        type: GREEN_ENEMY
       });
       this.addEntity(e);
     }
@@ -82,7 +153,7 @@ class Game {
 
   setupUI() {
     for (let i = this.livesRemaining - 1; i >= 0; i--) {
-      const life = new PlayerLife(new Vector2d(20 + 40 * i, 400), this.spritesImage);
+      const life = new PlayerLife(new Vector2d(20 + 40 * i, 550), this.spritesImage);
       this.uiElements.push(life);
     }
   }
