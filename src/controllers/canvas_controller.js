@@ -25,6 +25,9 @@ class canvasController {
     this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
     this.background.render(this.context);
+
+
+
     // this.drawSpriteTest();
     for (let i = 0; i < this.game.entities.length; i++) {
       let entity = this.game.entities[i];
@@ -36,6 +39,9 @@ class canvasController {
       let element = this.game.uiElements[i];
       element.render(this.context);
     }
+    this.context.font = "30px Arial";
+    this.context.fillStyle = "#ffffff";
+    this.context.fillText(`Score: ${this.game.score}`, 300, 40);
   }
 }
 

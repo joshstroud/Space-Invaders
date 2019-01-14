@@ -70,7 +70,7 @@ class Game {
     for (let i = 0; i < 5; i++) {
       const e = new Enemy({
         direction: new Vector2d(10, 0),
-        position: new Vector2d(100 + 40 * i, 20),
+        position: new Vector2d(100 + 40 * i, 80),
         game: this,
         image: this.spritesImage
       });
