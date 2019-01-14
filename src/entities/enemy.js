@@ -63,9 +63,9 @@ export class Enemy extends Entity {
     }
   }
 
-  die(removeEntityCallback) {
+  die(game) {
     let spriteFinishCallback = () => {
-      removeEntityCallback([this]);
+      game.removeEntities([this]);
     }
 
     let sprite = new Sprite(this.spriteImage, new Vector2d(158, 139), this.position, [32, 32], 1,

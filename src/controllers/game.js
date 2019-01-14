@@ -51,6 +51,7 @@ class Game {
   }
 
   setupPlayer() {
+    console.log("create player")
     let p = new Player({
       direction: new Vector2d(0, 0),
       position: new Vector2d(320, 300),
@@ -60,6 +61,7 @@ class Game {
       image: this.spritesImage
     });
     this.addEntity(p);
+    console.log(p)
   }
 
   setupEnemies() {
@@ -260,18 +262,18 @@ class Game {
   }
 
   handleEnemyPlayerCollision(enemy) {
-    // console.log("enemy player collision");
+    this.player.die(this);
+    enemy.die(this);
   }
 
   handleEnemyBulletCollision(enemy, bullet) {
-    console.log("enemy bullet collision");
-    enemy.die(this.removeEntities.bind(this));
+    enemy.die(this);
     this.removeEntities([bullet]);
   }
 
   handlePlayerBulletCollision(bullet) {
-    console.log(bullet);
-    this.player.die(bullet);
+    this.player.die(this);
+    this.removeEntities([bullet]);
   }
 
   updateEnemyPosition(enemy) {
@@ -280,10 +282,12 @@ class Game {
     // }
   }
 
-  update() {
-    this.handlePlayerMovement();
-    this.handleSpacePress();
 
+  update() {
+    if (this.player && !this.player.dying) {
+      this.handlePlayerMovement();
+      this.handleSpacePress();
+    }
     let now = Date.now();
     let dt = (now - this.lastTime);
 
