@@ -138,7 +138,12 @@ class Game {
   }
 
   endGame() {
-    console.log("Game is over")
+    if (game.won) {
+      console.log("player wins!")
+
+    } else {
+      console.log("Game Over")
+    }
   }
 
   addEntity(entity) {
@@ -276,13 +281,6 @@ class Game {
     this.removeEntities([bullet]);
   }
 
-  updateEnemyPosition(enemy) {
-    // if (enemy.position.x + enemy.width && enemy.state == HOME_STATE) {
-    //   enemy.direction = new Vector2d(-1 * enemy.direction.x, enemy.direction.y);
-    // }
-  }
-
-
   update() {
     if (this.player && !this.player.dying) {
       this.handlePlayerMovement();
@@ -293,7 +291,6 @@ class Game {
 
     for (let i = 0; i < this.entities.length; i++) {
       const entity = this.entities[i];
-      // console.log(`x: ${entity.position.x}, y: ${entity.position.y}`)
 
       entity.update(dt);
 
