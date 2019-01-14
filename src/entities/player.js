@@ -3,6 +3,8 @@ import Vector2d from "../util/vector";
 import * as GameConstants from "../util/constants"
 import Sprite from "../util/sprite";
 
+const WAIT_TIME_AFTER_PLAYER_DEATH = 1000;
+
 class Player extends Entity {
   constructor({
     position,
@@ -27,6 +29,7 @@ class Player extends Entity {
       sprite
     });
 
+    this.spriteImage = image;
     this.canvasWidth = canvasWidth;
 
   }
@@ -40,15 +43,30 @@ class Player extends Entity {
     }
   }
 
-  die(collidingEntity) {
-    this.game.livesRemaining -= 1;
-
-    collidingEntity.position = new Vector2d(100000, 10000);
-    this.game.removeEntities([collidingEntity]);
-
-    if (this.game.livesRemaining < 0) {
-      this.game.endGame();
+  die(game) {
+    if (this.dying) {
+      return;
     }
+    game.livesRemaining -= 1;
+
+    let spriteFinishCallback = () => {
+      game.removeEntities([this]);
+      if (game.livesRemaining < 0) {
+        game.endGame();
+      } else {
+        window.setTimeout(game.setupPlayer.bind(game), WAIT_TIME_AFTER_PLAYER_DEATH);
+      }
+    }
+
+    this.dying = true;
+    this.direction = new Vector2d(0, 0);
+
+    let sprite = new Sprite(this.spriteImage, new Vector2d(158, 139), this.position, [32, 32], 1,
+      [0, 1, 2], "horizontal", spriteFinishCallback)
+    this.sprite = sprite;
+    clearInterval(this.fireInterval)
+
+
   }
 }
 export default Player;
