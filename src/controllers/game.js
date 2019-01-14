@@ -249,7 +249,7 @@ class Game {
         } else if (entity1 instanceof Enemy &&
           entity2 instanceof Bullet &&
           entity2.type == PLAYER_BULLET_TYPE) {
-          this.handleEnemyBulletCollision();
+          this.handleEnemyBulletCollision(entity1, entity2);
         } else if (entity1 instanceof Bullet &&
           entity2 instanceof Player &&
           entity1.type == ENEMY_BULLET_TYPE) {
@@ -263,8 +263,10 @@ class Game {
     // console.log("enemy player collision");
   }
 
-  handleEnemyBulletCollision() {
-    // console.log("enemy bullet collision");
+  handleEnemyBulletCollision(enemy, bullet) {
+    console.log("enemy bullet collision");
+    enemy.die(this.removeEntities.bind(this));
+    this.removeEntities([bullet]);
   }
 
   handlePlayerBulletCollision(bullet) {

@@ -5,6 +5,8 @@ import * as GameConstants from "../util/constants"
 export const ENEMY_BULLET_TYPE = "ENEMY_BULLET_TYPE";
 export const PLAYER_BULLET_TYPE = "PLAYER_BULLET_TYPE";
 
+export const BULLET_SPEED = 3;
+
 export class Bullet extends Entity {
   constructor({
     position,
@@ -25,9 +27,9 @@ export class Bullet extends Entity {
 
 
     if (this.type === ENEMY_BULLET_TYPE) {
-      this.direction = new Vector2d(0, 1);
+      this.direction = new Vector2d(0, BULLET_SPEED);
     } else if (this.type === PLAYER_BULLET_TYPE) {
-      this.direction = new Vector2d(0, -1);
+      this.direction = new Vector2d(0, -1 * BULLET_SPEED);
     }
     this.direction = this.direction.multiply(20);
   }

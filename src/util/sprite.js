@@ -1,5 +1,5 @@
 class Sprite {
-  constructor(image, framePos, spritePos, size, speed, frames, dir, once) {
+  constructor(image, framePos, spritePos, size, speed, frames, dir, onceFinishCallback) {
     this.framePos = framePos;
     this.size = size;
     this.spritePos =
@@ -8,7 +8,8 @@ class Sprite {
     this._index = 0;
     this.image = image;
     this.dir = dir || 'horizontal';
-    this.once = once;
+    this.done = false;
+    this.onceFinishCallback = onceFinishCallback;
   };
   update(dt, newframePos) {
     // this._index += this.speed * dt;
@@ -27,7 +28,8 @@ class Sprite {
       var idx = Math.floor(this._index);
       frame = this.frames[idx % max];
 
-      if (this.once && idx >= max) {
+      if (this.onceFinishCallback && idx >= max && !this.done) {
+        this.onceFinishCallback();
         this.done = true;
         return;
       }

@@ -39,11 +39,14 @@ export class Enemy extends Entity {
       sprite
     });
 
+    this.spriteImage = image;
+
+
     this.firePercent = BULLET_FIRE_PERCENT;
     this.firePeriod = Math.random * BULLET_FIRE_PERIOD;
     this.state = HOME_STATE;
 
-    window.setInterval(this.fireTimer.bind(this), 100);
+    this.fireInterval = window.setInterval(this.fireTimer.bind(this), 100);
   }
 
   fireTimer(e) {
@@ -58,6 +61,17 @@ export class Enemy extends Entity {
       })
       this.game.addEntity(bullet);
     }
+  }
+
+  die(removeEntityCallback) {
+    let spriteFinishCallback = () => {
+      removeEntityCallback([this]);
+    }
+
+    let sprite = new Sprite(this.spriteImage, new Vector2d(158, 139), this.position, [32, 32], 1,
+      [0, 1, 2], "horizontal", spriteFinishCallback)
+    this.sprite = sprite;
+    clearInterval(this.fireInterval)
   }
 
   randomPercentage() {
