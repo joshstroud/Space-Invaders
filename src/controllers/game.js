@@ -37,8 +37,7 @@ class Game {
     this.spacePressed = false;
     this.canvasController = new CanvasController(this);
 
-    this.livesRemaining = 2;
-    this.gameOver = false;
+    this.livesRemaining = 3;
   }
 
   setup() {
@@ -137,13 +136,16 @@ class Game {
     window.requestAnimationFrame(this.update.bind(this));
   }
 
-  endGame() {
-    if (game.won) {
-      console.log("player wins!")
+  gameWon() {
+    return this.enemies.length === 0;
+  }
 
-    } else {
-      console.log("Game Over")
-    }
+  winGame() {
+    console.log("player wins!")
+  }
+
+  loseGame() {
+    console.log("Game Over")
   }
 
   addEntity(entity) {
@@ -282,6 +284,12 @@ class Game {
   }
 
   update() {
+    if (this.gameWon()) {
+      this.winGame();
+    } else if (this.livesRemaining <= 0) {
+      this.loseGame();
+    }
+
     if (this.player && !this.player.dying) {
       this.handlePlayerMovement();
       this.handleSpacePress();
@@ -296,9 +304,6 @@ class Game {
 
       this.checkEntityInBounds(entity);
       this.checkCollisions();
-      if (entity instanceof Enemy) {
-        this.updateEnemyPosition(entity);
-      }
     }
 
     this.canvasController.render();

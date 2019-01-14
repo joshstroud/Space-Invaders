@@ -51,9 +51,7 @@ class Player extends Entity {
 
     let spriteFinishCallback = () => {
       game.removeEntities([this]);
-      if (game.livesRemaining < 0) {
-        game.endGame();
-      } else {
+      if (game.livesRemaining > 0) {
         window.setTimeout(game.setupPlayer.bind(game), WAIT_TIME_AFTER_PLAYER_DEATH);
       }
     }
