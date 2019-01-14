@@ -47,7 +47,7 @@ class Player extends Entity {
     if (this.dying) {
       return;
     }
-    game.livesRemaining -= 1;
+    game.removeLife();
 
     let spriteFinishCallback = () => {
       game.removeEntities([this]);

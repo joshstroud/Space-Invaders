@@ -19,6 +19,8 @@ import {
   CANVAS_HEIGHT
 } from "../util/constants"
 
+import PlayerLife from "../ui/player_life"
+
 import spritesImagesUrl from "../img/sprites-2x-transparent.png";
 // import spritesImagesUrl from "../img/sprites-4x.png";
 const spriteSize = 32; // 4x: 64, 2x: 32, 1x: 16
@@ -38,6 +40,8 @@ class Game {
     this.canvasController = new CanvasController(this);
 
     this.livesRemaining = 3;
+    this.uiElements = [];
+    this.score = 0;
   }
 
   setup() {
@@ -46,11 +50,11 @@ class Game {
     this.setupPlayer();
     this.setupEnemies();
     this.setupKeyHandlers();
+    this.setupUI();
     this.lastTime = Date.now();
   }
 
   setupPlayer() {
-    console.log("create player")
     let p = new Player({
       direction: new Vector2d(0, 0),
       position: new Vector2d(320, 300),
@@ -60,7 +64,6 @@ class Game {
       image: this.spritesImage
     });
     this.addEntity(p);
-    console.log(p)
   }
 
   setupEnemies() {
@@ -75,8 +78,13 @@ class Game {
     }
 
     this.enemyBoundingRect = new Rectangle(0, 0, CANVAS_WIDTH, 200);
-    // updateEnemyBoundingBox();
+  }
 
+  setupUI() {
+    for (let i = this.livesRemaining - 1; i >= 0; i--) {
+      const life = new PlayerLife(new Vector2d(20 + 40 * i, 400), this.spritesImage);
+      this.uiElements.push(life);
+    }
   }
 
   // updateEnemyBoundingBox() {
@@ -268,6 +276,14 @@ class Game {
     }
   }
 
+  removeLife() {
+    this.livesRemaining -= 1;
+    const lifeIdx = this.uiElements.findIndex((el) => {
+      return el instanceof PlayerLife;
+    });
+    this.uiElements.splice(lifeIdx, 1);
+  }
+
   handleEnemyPlayerCollision(enemy) {
     this.player.die(this);
     enemy.die(this);
@@ -276,6 +292,7 @@ class Game {
   handleEnemyBulletCollision(enemy, bullet) {
     enemy.die(this);
     this.removeEntities([bullet]);
+    this.score += 100;
   }
 
   handlePlayerBulletCollision(bullet) {
@@ -286,8 +303,10 @@ class Game {
   update() {
     if (this.gameWon()) {
       this.winGame();
+      return;
     } else if (this.livesRemaining <= 0) {
       this.loseGame();
+      return;
     }
 
     if (this.player && !this.player.dying) {

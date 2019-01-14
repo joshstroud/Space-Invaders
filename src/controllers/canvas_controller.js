@@ -31,6 +31,11 @@ class canvasController {
 
       entity.render(this.context);
     }
+
+    for (let i = 0; i < this.game.uiElements.length; i++) {
+      let element = this.game.uiElements[i];
+      element.render(this.context);
+    }
   }
 }
 

@@ -2,8 +2,8 @@ class Sprite {
   constructor(image, framePos, spritePos, size, speed, frames, dir, onceFinishCallback) {
     this.framePos = framePos;
     this.size = size;
-    this.spritePos =
-      this.speed = typeof speed === 'number' ? speed : 0;
+    this.spritePos = spritePos;
+    this.speed = typeof speed === 'number' ? speed : 0;
     this.frames = frames;
     this._index = 0;
     this.image = image;
