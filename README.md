@@ -1,10 +1,10 @@
-# Galaxian Clone
+# Galaxy - A Space Invaders Remake
 
 ## **Overview**
 
 Galaxy is a remake of one of the most popular games of all time: Space Invaders. Save Earth from the invading aliens in this classic space shooter.
 
-Play the live game.
+[Play the live game](http://josh-stroud.com/Galaxy/)
 
 ![Galaxian](https://github.com/joshstroud/Galaxy/blob/master/docs/playthrough.gif?raw=true "Galaxian Playthrough")
 
