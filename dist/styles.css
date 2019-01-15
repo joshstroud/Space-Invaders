@@ -1,3 +1,10 @@
+.main {
+  background-image: url("https://wallpapersite.com/images/pages/pic_w/6362.jpg");
+  background-size: cover;
+  height: 100vh;
+  width: 100vw;
+}
+
 button.punch {
   margin: 0 auto;
   background: #4162a8;
@@ -47,12 +54,12 @@ button.punch:active {
 }
 
 .game-over-container {
-  width: 500px;
+  width: 480px;
   text-align: center;
   background: white;
   position: absolute;
   top: 200px;
-  left: calc(50vw - 250px);
+  left: calc(50vw - 240px);
   font-family: sans-serif;
 }
 
