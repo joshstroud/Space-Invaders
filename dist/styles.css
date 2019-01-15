@@ -59,3 +59,17 @@ button.punch:active {
 .game-over-container h1 {
   padding: 20px;
 }
+
+.mute-btn {
+  color: #ffffff;
+  opacity: 0.8;
+  position: absolute;
+  top: 543px;
+  font-size: 48px;
+  left: calc(50vw + 130px);
+  cursor: pointer
+}
+
+.mute-btn:hover {
+  opacity: 1;
+}

@@ -78,6 +78,7 @@ export class Enemy extends Entity {
         game: this.game,
         width: 10,
         height: 10,
+        game: this.game
       })
       this.game.addEntity(bullet);
     }
@@ -92,11 +93,14 @@ export class Enemy extends Entity {
       [0, 1, 2], "horizontal", spriteFinishCallback)
     this.sprite = sprite;
     clearInterval(this.fireInterval);
-    let sound = new Howl({
-      src: [explosionSoundSrc]
-    });
 
-    sound.play();
+    if (game.soundOn) {
+      let sound = new Howl({
+        src: [explosionSoundSrc]
+      });
+
+      sound.play();
+    }
   }
 
   randomPercentage() {

@@ -59,7 +59,8 @@ class Game {
       loop: true
     });
 
-    this.music = music.play();
+    this.music = music;
+    this.music.play();
 
   }
 
@@ -77,6 +78,7 @@ class Game {
     this.livesRemaining = 3;
     this.uiElements = [];
     this.score = 0;
+    this.soundOn = true;
   }
 
   setupPlayer() {
@@ -177,6 +179,26 @@ class Game {
       const life = new PlayerLife(new Vector2d(20 + 40 * i, 550), this.spritesImage);
       this.uiElements.push(life);
     }
+
+    this.muteButton = document.getElementsByClassName("mute-btn")[0];
+    this.muteButton.addEventListener("click", this.toggleSound.bind(this));
+  }
+
+  toggleSound() {
+    const muteBtnIcon = document.getElementById("mute-btn-icon");
+
+    // turn sound on
+    if (this.soundOn) {
+      muteBtnIcon.classList.remove("fa-volume-mute");
+      muteBtnIcon.classList.add("fa-volume-up");
+      this.music.mute(true);
+    } else {
+      muteBtnIcon.classList.remove("fa-volume-up");
+      muteBtnIcon.classList.add("fa-volume-mute");
+      this.music.mute(false);
+    }
+    this.soundOn = !this.soundOn;
+
   }
 
   setupKeyHandlers() {
@@ -264,7 +286,8 @@ class Game {
     if (this.spacePressed && !this.bullets.some((bullet) => bullet.type === PLAYER_BULLET_TYPE)) {
       let bullet = new Bullet({
         position: new Vector2d(this.player.position.x + this.player.width / 2, this.player.position.y),
-        type: PLAYER_BULLET_TYPE
+        type: PLAYER_BULLET_TYPE,
+        game
       });
       this.addEntity(bullet);
     }

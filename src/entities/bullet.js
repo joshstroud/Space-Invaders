@@ -20,7 +20,8 @@ export class Bullet extends Entity {
   constructor({
     position,
     direction,
-    type
+    type,
+    game
   }) {
     let bulletWidth = 2;
     let bulletHeight = 12;
@@ -42,15 +43,17 @@ export class Bullet extends Entity {
     }
     this.direction = this.direction.multiply(20);
 
-    let soundSrc = playerLaserSound;
-    if (this.type === ENEMY_BULLET_TYPE) {
-      soundSrc = enemyLaserSound;
-    }
-    var sound = new Howl({
-      src: [soundSrc]
-    });
+    if (game.soundOn) {
+      let soundSrc = playerLaserSound;
+      if (this.type === ENEMY_BULLET_TYPE) {
+        soundSrc = enemyLaserSound;
+      }
+      let sound = new Howl({
+        src: [soundSrc]
+      });
 
-    sound.play();
+      sound.play();
+    }
   }
 
   render(ctx) {

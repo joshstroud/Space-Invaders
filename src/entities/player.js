@@ -71,11 +71,13 @@ class Player extends Entity {
     this.sprite = sprite;
     clearInterval(this.fireInterval)
 
-    let sound = new Howl({
-      src: [explosionSoundSrc]
-    });
+    if (game.soundOn) {
+      let sound = new Howl({
+        src: [explosionSoundSrc]
+      });
 
-    sound.play();
+      sound.play();
+    }
   }
 }
 export default Player;
