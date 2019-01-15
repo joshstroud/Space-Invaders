@@ -2,6 +2,13 @@ import Entity from "./entity"
 import Vector2d from "../util/vector";
 import * as GameConstants from "../util/constants"
 
+import {
+  Howl,
+  Howler
+} from "howler";
+
+const laserSound = "../sounds/laser_default.mp3"
+
 export const ENEMY_BULLET_TYPE = "ENEMY_BULLET_TYPE";
 export const PLAYER_BULLET_TYPE = "PLAYER_BULLET_TYPE";
 
@@ -32,6 +39,13 @@ export class Bullet extends Entity {
       this.direction = new Vector2d(0, -1 * BULLET_SPEED);
     }
     this.direction = this.direction.multiply(20);
+    this.sound = new Howl({
+      src: [
+        [laserSound]
+      ]
+    });
+
+    this.sound.play();
   }
 
   render(ctx) {

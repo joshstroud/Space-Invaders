@@ -31,6 +31,21 @@ const spriteSize = 32; // 4x: 64, 2x: 32, 1x: 16
 
 class Game {
   constructor() {
+    this.canvasController = new CanvasController(this);
+  }
+
+  setup() {
+    this.setupVariables();
+    this.spritesImage = new Image();
+    this.spritesImage.src = spritesImagesUrl;
+    this.setupPlayer();
+    this.setupEnemies();
+    this.setupKeyHandlers();
+    this.setupUI();
+    this.lastTime = Date.now();
+  }
+
+  setupVariables() {
     this.entities = [];
     this.enemies = [];
     this.bullets = [];
@@ -41,21 +56,10 @@ class Game {
     this.leftPressed = false;
     this.rightPressed = false;
     this.spacePressed = false;
-    this.canvasController = new CanvasController(this);
 
     this.livesRemaining = 3;
     this.uiElements = [];
     this.score = 0;
-  }
-
-  setup() {
-    this.spritesImage = new Image();
-    this.spritesImage.src = spritesImagesUrl;
-    this.setupPlayer();
-    this.setupEnemies();
-    this.setupKeyHandlers();
-    this.setupUI();
-    this.lastTime = Date.now();
   }
 
   setupPlayer() {
@@ -219,12 +223,11 @@ class Game {
     return this.enemies.length === 0;
   }
 
-  winGame() {
-    console.log("player wins!")
-  }
-
-  loseGame() {
-    console.log("Game Over")
+  concludeGame(message) {
+    const messageContainer = document.getElementsByClassName("game-over-container")[0];
+    messageContainer.classList.remove("hidden");
+    const messageEl = document.getElementsByClassName("game-over-message")[0];
+    messageEl.innerText = message;
   }
 
   addEntity(entity) {
@@ -373,11 +376,9 @@ class Game {
 
   update() {
     if (this.gameWon()) {
-      this.winGame();
-      return;
+      this.concludeGame("You Win!");
     } else if (this.livesRemaining <= 0) {
-      this.loseGame();
-      return;
+      this.concludeGame("You Lose!");
     }
 
     if (this.player && !this.player.dying) {

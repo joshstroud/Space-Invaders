@@ -14,6 +14,8 @@ class canvasController {
     this.background = new Background();
   }
 
+
+
   drawBox(color, entity) {
     this.context.fillStyle = color;
     this.context.fillRect(entity.position.x, entity.position.y, entity.width, entity.height);

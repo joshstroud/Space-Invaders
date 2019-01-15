@@ -10,12 +10,18 @@ module.exports = {
   devtool: 'source-map',
   module: {
     rules: [{
-      test: /\.(png|jpg|gif|mp3)$/,
-      use: [{
-        loader: 'file-loader',
-        options: {},
-      }, ],
-    }, ],
-
+        test: /\.(png|jpg|gif)$/,
+        use: [{
+          loader: 'file-loader',
+          options: {},
+        }, ],
+      },
+      {
+        test: /\.(mp3)$/,
+        use: [{
+          loader: 'file-loader'
+        }, ],
+      }
+    ]
   },
 };

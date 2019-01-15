@@ -16,12 +16,19 @@
       margin: 0 auto;
     }
   </style>
+
+  <link rel="stylesheet" href="./styles.css">
 </head>
 
 <body>
   <canvas id="canvas" width="480" height="640"></canvas>
-
-  <script src="bundle.js"></script>
+  <button class="punch" id="play-btn">PLAY</button>
+  <div class="game-over-container hidden">
+    <h1 class="game-over-message">Game Over</h1>
+    <!-- <button class="punch" id="play-again-btn">PLAY AGAIN</button> -->
+  </div>
+  <script src="bundle.js">
+  </script>
 </body>
 
 </html>

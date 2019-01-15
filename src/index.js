@@ -20,7 +20,11 @@ const startGame = () => {
   const game = new Game();
   window.game = game;
 
-  game.play();
+  const playBtn = document.getElementById("play-btn");
+  playBtn.addEventListener("click", (e) => {
+    e.target.classList.add("hidden");
+    game.play();
+  });
 }
 
 startGame();
