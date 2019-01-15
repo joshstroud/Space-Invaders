@@ -2,87 +2,106 @@
 
 ## **Overview**
 
-Galaxian is a remake of one of the most popular games of all time: Space Invaders. Galaxian is slightly more sophisticated and includes moving enemies that shoot at the player.
+Galaxy is a remake of one of the most popular games of all time: Space Invaders. Save Earth from the invading aliens in this classic space shooter.
 
-I plan to make a clone of the game from scratch in Javascript with faithful color graphics.
+Play the live game.
 
-![Galaxian](https://github.com/joshstroud/GalaxianClone/blob/master/docs/galaxian-screenshot.png?raw=true "Galaxian Screenshot")
+![Galaxian](https://github.com/joshstroud/Galaxy/blob/master/docs/playthrough.gif?raw=true "Galaxian Playthrough")
 
-[View Galaxian gameplay video](https://youtu.be/XhYVcwhSWjI?t=60)
+## **Technologies**
 
-The player is a ship at the bottom of the screen. The player shoots at an invading grid of aliens descending from the top of the screen. Aliens will move and chase the player as well as fire bullets. The player wins when all the aliens are destroyed. The player loses a life when an alien or a bullet touches the player.
+- HTML5
+- CSS
+- Vanilla Javascript
+- HTML5 Canvas API (graphics)
+- Howler JS (sound library)
 
-## **Functionality**
+## **Features**
 
-- Basic animated visuals and keyboard interaction.
-- Players can use arrow keys to move a ship left/right.
-- Players can fire bullets at aliens to destroy them.
-- Aliens chase the player and fire bullets.
-- Faithful sprites from original game
-- Collision detection between all relevant objects
-- First level is implemented.
+- Retro sounds and graphics
+- Custom game engine that handles physics, animations, and game logic
+- Fun and addictive gameplay
 
-The game page will consist of the game frame with a play and mute button.
+## **Project Highlights**
 
-Upon pressing play the game starts.
+### Game Engine
 
-Upon 'Game Over' a modal will appear, offering the player to play again.
+This project uses a game engine designed and built from scratch. The game engine handles physics, collision detection, rendering animations via sprites, sounds, and game logic.
 
-## **Technologies employed**
+The heart of the game engine is the update method, which is called once per animation frame to update the game state, render graphics, and update the physics engine.
 
-- Vanilla JavaScript for game logic.
-- HTML5 Canvas for rendering.
-- Webpack to bundle various scripts into a single source.
-- React.js for basic page structure and functionality.
+```js
+update() {
+    this.checkGameOver();
 
-## **Main files**
+    if (this.player && !this.player.dying) {
+      this.handlePlayerMovement();
+      this.handleSpacePress();
+    }
+    let now = Date.now();
+    let dt = (now - this.lastTime);
 
-- `game.js` main structure of the canvas and center of game logic.
-- `environment.js` responsible for rendering the space environment as well as UI elements.
-- `player.js` handles ship rendering and logic, and accepts player input.
-- `alien.js` handles aliens rendering and logic
-- `bullet.js`handles bullet rendering and logic for both players and aliens
+    for (let i = 0; i < this.entities.length; i++) {
+      const entity = this.entities[i];
 
-**Development timeline**
+      entity.update(dt);
 
-#####
+      this.checkCollisions();
+    }
 
-**Day 1:**
+    this.canvasController.render();
+    this.lastTime = now;
+    window.requestAnimationFrame(this.update.bind(this))
+  }
+```
 
-1.  Review resources on how to create games using Canvas.
-1.  Complete basic page skeleton and functionality.
-1.  Complete environment rendering.
+## Modular Object-Oriented Design
 
-#####
+To implement the physics engine, the game defines an entity object which handles the core physics and rendering logic. Enemies, the player, and lasers all extend this entity object. The engine calls update on each entity to update the entity's physics and animations.
 
-**Day 2:**
+```js
+class Entity {
+  update(dt) {
+    const newX = this.position.x + this.direction.x / dt;
+    const newY = this.position.y + this.direction.y / dt;
+    this.position = new Vector2d(newX, newY);
 
-1.  Complete player avatar rendering and functionality.
-1.  Start alien rendering and functionality
+    if (this.sprite) {
+      this.sprite.updatePos(this.position);
+      this.sprite.update(dt);
+    }
+  }
+}
+```
 
-#####
+## Animation using the HTML5 Canvas API
 
-**Day 3:**
+A simple canvas controller class handles rendering of graphics and animations for each object. This approach abstracts away animation logic from game logic, similar to the MVC design pattern.
 
-1.  Implement object collision detection and handling.
-1.  Finish game over condition.
+```js
+class canvasController {
+  render() {
+    this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this.context.fillStyle = "#000000";
+    this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
-#####
+    this.background.render(this.context);
 
-**Day 4:**
+    for (let i = 0; i < this.game.entities.length; i++) {
+      let entity = this.game.entities[i];
 
-1.  Polish game style and fix bugs.
-1.  Style web page.
+      entity.render(this.context);
+    }
 
-#####
+    for (let i = 0; i < this.game.uiElements.length; i++) {
+      let uiElement = this.game.uiElements[i];
+      uiElement.render(this.context);
+    }
+  }
+}
+```
 
-**Day 5:**
-
-1.  Implement bonus features.
-
-###
-
-## **Bonus features**
+## **Future features**
 
 - Multiple levels
 - More enemy types
@@ -90,5 +109,3 @@ Upon 'Game Over' a modal will appear, offering the player to play again.
   - More bullet patterns
   - Shields
   - Player speed increase
-
-<!-- GD2md-html version 1.0β13 -->
