@@ -1,3 +1,8 @@
+p,
+li {
+  font-size: 15px;
+}
+
 .main {
   background-image: url("https://wallpapersite.com/images/pages/pic_w/6362.jpg");
   background-size: cover;
@@ -7,9 +12,9 @@
 }
 
 .sidebar {
-  display: flex;
+  /* display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: center; */
   width: 400px;
   padding: 50px;
 }
@@ -75,7 +80,7 @@ button.punch {
 }
 
 #project-info-button {
-  height: 70px;
+  /* height: 70px; */
 }
 
 #play-again-btn {
@@ -124,4 +129,19 @@ button.punch:active {
 
 .mute-btn:hover {
   opacity: 1;
+}
+
+a {
+  padding-bottom: 10px;
+  display: block;
+  text-decoration: none;
+  font-weight: 400;
+  color: #0051A3;
+  transition: color 0.2s;
+}
+
+a:hover {
+  font-weight: 500;
+  color: #000000;
+
 }

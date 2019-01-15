@@ -406,7 +406,6 @@ class Game {
   update() {
     this.checkGameOver();
 
-
     if (this.player && !this.player.dying) {
       this.handlePlayerMovement();
       this.handleSpacePress();
