@@ -228,6 +228,10 @@ class Game {
     messageContainer.classList.remove("hidden");
     const messageEl = document.getElementsByClassName("game-over-message")[0];
     messageEl.innerText = message;
+    const playAgainBtn = document.getElementById("play-again-btn");
+    playAgainBtn.addEventListener("click", (e) => {
+      location.reload()
+    });
   }
 
   addEntity(entity) {
