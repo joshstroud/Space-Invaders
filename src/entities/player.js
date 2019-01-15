@@ -11,7 +11,6 @@ class Player extends Entity {
     speed,
     direction,
     canvasWidth,
-    game,
     image
   }) {
     let sprite = new Sprite(image, new Vector2d(2, 140), position, [32, 32], 1, [0])
@@ -25,7 +24,6 @@ class Player extends Entity {
       width,
       height,
       canvasWidth,
-      game,
       sprite
     });
 
