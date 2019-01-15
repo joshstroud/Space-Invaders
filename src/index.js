@@ -6,6 +6,10 @@ import {
   Enemy
 } from "./entities/enemy"
 
+
+
+import laserSound from "./sounds/laser_default.mp3"
+
 import {
   testAddAndRemoveEntities
 } from "./tests/game_tests"

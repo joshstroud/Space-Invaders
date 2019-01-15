@@ -25,6 +25,13 @@ import {
 
 import PlayerLife from "../ui/player_life"
 
+import {
+  Howl,
+  Howler
+} from "howler";
+
+import gameMusicSrc from "../sounds/game_music.mp3"
+
 import spritesImagesUrl from "../img/sprites-2x-transparent.png";
 // import spritesImagesUrl from "../img/sprites-4x.png";
 const spriteSize = 32; // 4x: 64, 2x: 32, 1x: 16
@@ -42,7 +49,18 @@ class Game {
     this.setupEnemies();
     this.setupKeyHandlers();
     this.setupUI();
+    this.setupMusic();
     this.lastTime = Date.now();
+  }
+
+  setupMusic() {
+    let music = new Howl({
+      src: [gameMusicSrc],
+      loop: true
+    });
+
+    this.music = music.play();
+
   }
 
   setupVariables() {
@@ -50,7 +68,6 @@ class Game {
     this.enemies = [];
     this.bullets = [];
     this.player = null;
-    this.gameRect
     this.started = false;
 
     this.leftPressed = false;
@@ -162,28 +179,6 @@ class Game {
     }
   }
 
-  // updateEnemyBoundingBox() {
-  //   let minX = canvasWidth;
-  //   let minY = canvasHeight
-  //   let maxX = 0;
-  //   let maxY = 0;
-
-  //   for(let i = 0; i < this.enemies.length; i++) {
-  //     if(this.enemies[i].position.x < minX) {
-  //       minX = this.enemies.position.x;
-  //     }
-  //     if(this.enemies[i].position.y < minY) {
-  //       minY = this.enemies.position.y;
-  //     }
-  //     if(this.enemies[i].position.x + this.enemies[i].position.width < minX) {
-  //       minX = this.enemies;
-  //     }
-  //     if(this.enemies[i].position.x < minX) {
-  //       minX = this.enemies;
-  //     }
-  //   }
-  // }
-
   setupKeyHandlers() {
     document.addEventListener("keydown", this.keyDownHandler.bind(this));
     document.addEventListener("keyup", this.keyUpHandler.bind(this));
@@ -198,8 +193,6 @@ class Game {
     } else if (e.keyCode == 32) {
       this.spacePressed = true;
     }
-
-    // console.log("keydown", e);
   }
 
   keyUpHandler(e) {
@@ -210,7 +203,6 @@ class Game {
     } else if (e.keyCode == 32) {
       this.spacePressed = false;
     }
-    // console.log("keyup: ", e);
   }
 
   play() {

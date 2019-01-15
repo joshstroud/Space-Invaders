@@ -3,7 +3,16 @@ import Vector2d from "../util/vector";
 import * as GameConstants from "../util/constants"
 import Sprite from "../util/sprite";
 
+import {
+  Howl,
+  Howler
+} from "howler";
+
+import explosionSoundSrc from "../sounds/explosion.mp3";
+
+
 const WAIT_TIME_AFTER_PLAYER_DEATH = 1000;
+
 
 class Player extends Entity {
   constructor({
@@ -62,7 +71,11 @@ class Player extends Entity {
     this.sprite = sprite;
     clearInterval(this.fireInterval)
 
+    let sound = new Howl({
+      src: [explosionSoundSrc]
+    });
 
+    sound.play();
   }
 }
 export default Player;

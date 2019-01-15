@@ -10,7 +10,13 @@ import Sprite from "../util/sprite"
 import {
   SPRITES_FILE_NAME
 } from "../util/constants";
-// import sprite from `../img/sprites-2x.png`
+
+import {
+  Howl,
+  Howler
+} from "howler";
+
+import explosionSoundSrc from "../sounds/explosion.mp3";
 
 export const HOME_STATE = "HOME_STATE";
 export const CHASING_STATE = "CHASING_STATE";
@@ -85,7 +91,12 @@ export class Enemy extends Entity {
     let sprite = new Sprite(this.spriteImage, new Vector2d(158, 139), this.position, [32, 32], 1,
       [0, 1, 2], "horizontal", spriteFinishCallback)
     this.sprite = sprite;
-    clearInterval(this.fireInterval)
+    clearInterval(this.fireInterval);
+    let sound = new Howl({
+      src: [explosionSoundSrc]
+    });
+
+    sound.play();
   }
 
   randomPercentage() {

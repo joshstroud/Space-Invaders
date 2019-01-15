@@ -7,7 +7,9 @@ import {
   Howler
 } from "howler";
 
-const laserSound = "../sounds/laser_default.mp3"
+import playerLaserSound from "../sounds/laser_default.mp3";
+import enemyLaserSound from "../sounds/enemy_laser.mp3";
+
 
 export const ENEMY_BULLET_TYPE = "ENEMY_BULLET_TYPE";
 export const PLAYER_BULLET_TYPE = "PLAYER_BULLET_TYPE";
@@ -39,13 +41,16 @@ export class Bullet extends Entity {
       this.direction = new Vector2d(0, -1 * BULLET_SPEED);
     }
     this.direction = this.direction.multiply(20);
-    this.sound = new Howl({
-      src: [
-        [laserSound]
-      ]
+
+    let soundSrc = playerLaserSound;
+    if (this.type === ENEMY_BULLET_TYPE) {
+      soundSrc = enemyLaserSound;
+    }
+    var sound = new Howl({
+      src: [soundSrc]
     });
 
-    this.sound.play();
+    sound.play();
   }
 
   render(ctx) {
