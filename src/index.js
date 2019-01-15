@@ -7,7 +7,6 @@ import {
 } from "./entities/enemy"
 
 
-
 import laserSound from "./sounds/laser_default.mp3"
 
 import {
@@ -20,15 +19,31 @@ import {
 // testAddAndRemoveEntities();
 // testCanvas();
 
-const startGame = () => {
+const setup = () => {
   const game = new Game();
-  window.game = game;
 
   const playBtn = document.getElementById("play-btn");
   playBtn.addEventListener("click", (e) => {
     e.target.classList.add("hidden");
     game.play();
   });
+
+  const aboutBtn = document.getElementById("project-info-button");
+  aboutBtn.addEventListener("click", toggleDescription);
 }
 
-startGame();
+const toggleDescription = () => {
+  const description = document.getElementsByClassName("description")[0];
+  const aboutBtn = document.getElementById("project-info-button");
+
+  if (description.classList.contains("hidden")) {
+    description.classList.remove("hidden");
+    aboutBtn.innerText = "Close"
+  } else {
+    description.classList.add("hidden");
+    aboutBtn.innerText = "About the Project"
+
+  }
+}
+
+setup();

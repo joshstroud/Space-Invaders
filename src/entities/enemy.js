@@ -22,7 +22,7 @@ export const HOME_STATE = "HOME_STATE";
 export const CHASING_STATE = "CHASING_STATE";
 
 const BULLET_FIRE_PERIOD = 10;
-const BULLET_FIRE_PERCENT = 1;
+const BULLET_FIRE_PERCENT = 5;
 
 export const RED_ENEMY = "RED_ENEMY"
 export const GREEN_ENEMY = "GREEN_ENEMY"

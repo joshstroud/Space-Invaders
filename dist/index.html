@@ -1,43 +1,68 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <title>Galaxian - Space Shooting Game</title>
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
-      integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
-      crossorigin="anonymous"
-    />
 
-    <style>
-      * {
-        padding: 0;
-        margin: 0;
-      }
+<head>
+  <meta charset="utf-8" />
+  <title>Galaxy - Space Shooting Game</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+    crossorigin="anonymous" />
 
-      canvas {
-        background: #eee;
-        display: block;
-        margin: 0 auto;
-      }
-    </style>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
 
-    <link rel="stylesheet" href="./styles.css" />
-  </head>
+    canvas {
+      background: #eee;
+      display: block;
+      margin: 0 auto;
+    }
+  </style>
 
-  <body>
-    <main class="main">
-      <canvas id="canvas" width="480" height="640"></canvas>
-      <button class="punch" id="play-btn">PLAY</button>
-      <div class="game-over-container hidden">
-        <h1 class="game-over-message">Game Over</h1>
-        <button class="punch" id="play-again-btn">PLAY AGAIN</button>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+
+<body>
+  <main class="main">
+    <div class="sidebar">
+      <button class="punch" id="project-info-button">About the Project</button>
+
+      <div class="description hidden">
+        <h1>Galaxy</h1>
+        <h2> A Space Invaders Clone</h2>
+        <p>This game is a simple remake of arcade classic Space Invaders. This game was built in 5 days using
+          HTML5, CSS,
+          and JS. </p>
+        <h3>How to Play</h3>
+        <p>Move left and right with the arrow keys, and shoot lasers with the space bar. <br> <br>Destroy all the
+          aliens to win!</p>
+        <h3>Features</h3>
+        <ul>
+          <li>Custom game engine that handles physics, animations, and game logic</li>
+          <li>Rendering and animations using vanilla JS and the Canvas API</li>
+          <li>Sounds and music handled by the Howler JS library</li>
+        </ul>
       </div>
-      <div class="mute-btn">
-        <i id="mute-btn-icon" class="fa fa-volume-mute"></i>
-      </div>
-      <script src="bundle.js"></script>
-    </main>
-  </body>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+
+
+    <canvas id="canvas" width="480" height="640"></canvas>
+
+    <button class="punch" id="play-btn">PLAY</button>
+    <div class="game-over-container hidden">
+      <h1 class="game-over-message">Game Over</h1>
+      <button class="punch" id="play-again-btn">PLAY AGAIN</button>
+    </div>
+    <div class="mute-btn">
+      <i id="mute-btn-icon" class="fa fa-volume-mute"></i>
+    </div>
+    <script src="bundle.js"></script>
+  </main>
+</body>
+
 </html>

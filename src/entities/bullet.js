@@ -14,7 +14,7 @@ import enemyLaserSound from "../sounds/enemy_laser.mp3";
 export const ENEMY_BULLET_TYPE = "ENEMY_BULLET_TYPE";
 export const PLAYER_BULLET_TYPE = "PLAYER_BULLET_TYPE";
 
-export const BULLET_SPEED = 3;
+export const BULLET_SPEED = 5;
 
 export class Bullet extends Entity {
   constructor({

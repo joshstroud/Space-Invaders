@@ -36,6 +36,8 @@ import spritesImagesUrl from "../img/sprites-2x-transparent.png";
 // import spritesImagesUrl from "../img/sprites-4x.png";
 const spriteSize = 32; // 4x: 64, 2x: 32, 1x: 16
 
+const PLAYER_SPEED = 50;
+
 class Game {
   constructor() {
     this.canvasController = new CanvasController(this);
@@ -287,7 +289,7 @@ class Game {
       let bullet = new Bullet({
         position: new Vector2d(this.player.position.x + this.player.width / 2, this.player.position.y),
         type: PLAYER_BULLET_TYPE,
-        game
+        game: this
       });
       this.addEntity(bullet);
     }
@@ -295,9 +297,9 @@ class Game {
 
   handlePlayerMovement() {
     if (this.leftPressed) {
-      this.player.direction = new Vector2d(-30, 0);
+      this.player.direction = new Vector2d(-PLAYER_SPEED, 0);
     } else if (this.rightPressed) {
-      this.player.direction = new Vector2d(30, 0);
+      this.player.direction = new Vector2d(PLAYER_SPEED, 0);
     } else {
       this.player.direction = new Vector2d(0, 0);
     }
@@ -393,12 +395,17 @@ class Game {
     this.removeEntities([bullet]);
   }
 
-  update() {
+  checkGameOver() {
     if (this.gameWon()) {
       this.concludeGame("You Win!");
     } else if (this.livesRemaining <= 0) {
       this.concludeGame("You Lose!");
     }
+  }
+
+  update() {
+    this.checkGameOver();
+
 
     if (this.player && !this.player.dying) {
       this.handlePlayerMovement();
